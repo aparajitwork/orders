@@ -1,0 +1,7 @@
+{
+  "name": "orders",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Orders micro-frontend, exposed via Module Federation",
+  "packageManager": "yarn@4.18.0"
+}
