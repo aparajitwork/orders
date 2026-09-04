@@ -1,9 +1,12 @@
 import { Router } from 'express';
 import { orders } from '../data/orders';
+import { randomDelay } from '../utils/delay';
 
 export const ordersRouter = Router();
 
-ordersRouter.get('/', (req, res) => {
+ordersRouter.get('/', async (req, res) => {
+  await randomDelay();
+
   const { status } = req.query;
   let results = orders;
 
@@ -14,7 +17,9 @@ ordersRouter.get('/', (req, res) => {
   res.json({ orders: results, count: results.length });
 })
 
-ordersRouter.get("/:id", (req, res) => {
+ordersRouter.get("/:id", async (req, res) => {
+  await randomDelay();
+  
   const order = orders.find(o => o.id === req.params.id);
   if (!order) {
     return res.status(404).json({ error: "Order not found" });
