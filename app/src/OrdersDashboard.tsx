@@ -19,7 +19,6 @@ const OrdersDashboard = ({ theme }: OrdersDashboardProps) => {
 
   useEffect(() => {
     let cancelled = false;
-    setState({ status: "loading" });
 
     fetchOrders()
       .then((orders) => {
@@ -35,6 +34,11 @@ const OrdersDashboard = ({ theme }: OrdersDashboardProps) => {
     return () => { cancelled = true };
   }, [reloadKey])
 
+  function handleRetry() {
+    setState({ status: 'loading' });
+    setReloadKey(prev => prev + 1);
+  }
+
   return (
     <div
       data-theme={theme}
@@ -49,7 +53,7 @@ const OrdersDashboard = ({ theme }: OrdersDashboardProps) => {
           <p className="text-sm text-ink-muted">Couldn't load orders: {state.message}</p>
           <button
             type="button"
-            onClick={() => setReloadKey(k => k + 1)}
+            onClick={handleRetry}
             className="mt-3 rounded-md border border-line px-3 py-1.5 text-sm"
           >
             Retry
