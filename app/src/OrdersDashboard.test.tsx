@@ -10,7 +10,7 @@ const mockedFetchOrders = jest.mocked(fetchOrders);
 
 const sampleOrders: Order[] = [
   {
-    id: "ord_1001",
+    // id: "ord_1001",
     customerName: "Priya Nair",
     customerEmail: "priya.nair@example.com",
     status: "delivered",
