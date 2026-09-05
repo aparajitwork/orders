@@ -1,5 +1,5 @@
 import { useState } from "react"
-import OrdersDashboard, { Theme } from "./OrdersDashboard"
+import OrdersDashboard, { type Theme } from "./OrdersDashboard"
 
 // just for testing in local, actual exposed component will be OrdersDashboard
 const App = () => {
