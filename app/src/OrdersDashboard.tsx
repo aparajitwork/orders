@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchOrders, Order } from "./api/orders";
+import OrdersSkeleton from "./OrdersSkeleton";
 
 export type Theme = 'light' | 'dark';
 
@@ -28,10 +29,10 @@ const OrdersDashboard = ({ theme }: OrdersDashboardProps) => {
         if (!cancelled) {
           const message = err instanceof Error ? err.message : "Something went wrong";
           setState({ status: "error", message })
-      }
+        }
       })
     
-    return () => cancelled = true;
+    return () => { cancelled = true };
   }, [reloadKey])
 
   return (
