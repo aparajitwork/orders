@@ -2,20 +2,21 @@ name: CI
 
 on:
   push:
+    branches: [main]
   pull_request:
     branches: [main]
 
 jobs:
-  lint-and-test:
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
-
     steps:
       - name: Check out code
         uses: actions/checkout@v4
 
-      - name: Enable corepack
+      - name: Enable Corepack
         run: corepack enable
-      
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -28,5 +29,24 @@ jobs:
       - name: Lint
         run: yarn workspaces foreach --all run lint
 
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: yarn
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
       - name: Test
-        run: yarn workspace @orders/app test
+        run: yarn workspace @orders-remote/app test
