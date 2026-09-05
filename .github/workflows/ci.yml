@@ -49,3 +49,25 @@ jobs:
 
       - name: Test
         run: yarn workspace @orders/app test
+      
+  typecheck:
+    name: Typecheck
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Enable corepack
+        run: corepack enable
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: yarn
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Typecheck
+        run: yarn workspaces foreach --all run typecheck
