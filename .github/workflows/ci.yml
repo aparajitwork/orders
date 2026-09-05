@@ -48,4 +48,4 @@ jobs:
         run: yarn install --immutable
 
       - name: Test
-        run: yarn workspace @orders-remote/app test
+        run: yarn workspace @orders/app test
